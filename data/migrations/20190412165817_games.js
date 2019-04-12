@@ -2,9 +2,9 @@ exports.up = function(knex, Promise) {
   return knex.schema.createTable("games", tbl => {
     tbl.increments();
 
-    tbl.string("title", 256).notNullable();
-    tbl.string("genre", 256).notNullable();
-    tbl.integer("release year");
+    tbl.string("title", 128).notNullable();
+    tbl.string("genre", 128).notNullable();
+    tbl.integer("release_year");
   });
 };
 
