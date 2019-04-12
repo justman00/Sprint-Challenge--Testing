@@ -15,23 +15,24 @@ server.get("/games", async (req, res) => {
 
     res.status(200).json(games);
   } catch (error) {
-    res.status(500).json(error);
+    res.status(500).json({ error });
   }
 });
 
 server.post("/games", async (req, res) => {
+  const { title, genre } = req.body;
+
+  if (!title || !genre) {
+    return res.status(422).json({ msg: "Provide the necessary fields" });
+  }
+
   try {
-    const { title, genre } = req.body;
-
-    if (!title || !genre) {
-      res.status(400).json({ err: "Provide the necessary fields" });
-    }
-
     const games = await Games.insert(req.body);
 
     res.status(200).json(games);
   } catch (error) {
-    res.status(500).json(error);
+    console.log(error);
+    res.status(500).json({ error });
   }
 });
 
